@@ -109,7 +109,7 @@ input:focus{border-color:var(--gold)}input::placeholder{color:#fff8}
 </section>
 
 <script>
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwrF9ABswBftqiBilySyHCI9vVn6Kdk7dLdaesvmKS5JC41OzwqxAsJckmgQcNgP8M/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwmFkDXt9jsh57cIDUiXpyjSov7ypKR9rIdl0t342TEuuE4DL9SCAX8UhmPE4FJA5Q5/exec";
 
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 let player="", sc=[0,0,0], muted=false, ac;
@@ -196,7 +196,7 @@ let sel=null, matched=0;
 const shuf=a=>[...a].sort(()=>Math.random()-.5);
 function mk(side,k,html){const b=document.createElement("button");b.className="it";b.dataset.k=k;b.dataset.side=side;b.innerHTML=html;b.onclick=()=>pick(b);return b}
 function buildS1(){
-  // 6 random pairs from the 12-item pool; words and pictures are shuffled separately
+  // 6 random pairs from the 18-item pool; words and pictures are shuffled separately
   const pick6=shuf(V).slice(0,6);
   shuf(pick6).forEach(v=>$("#wc").append(mk("w",v[0],v[1])));
   shuf(pick6).forEach(v=>$("#pc").append(mk("p",v[0],v[2])));
@@ -316,7 +316,7 @@ function endScreen(){
   clearInterval(timerId);const playTimeText=fmt(Date.now()-startTime);
   show("end",true);$("#hud").style.display="none";$("#en").textContent=player;
   const row=(a,b,cl="")=>`<div class="${cl}"><span>${a}</span><b>${b}</b></div>`;
-  const esc=s=>s.replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));
+  const esc=s=>s.replace(/[&<>]/g,m=>({"&":"&","<":"<",">":">"}[m]));
   $("#sum").innerHTML=row("Player",esc(player))+row("Stage 1",sc[0])+row("Stage 2",sc[1])+row("Stage 3",sc[2])+row("Total score",total(),"t")+row("Time",playTimeText);
   [523,659,784,1047].forEach((f,i)=>setTimeout(()=>snd(f,1,.05),i*350));
   const payload={nama:player,stage1:sc[0],stage2:sc[1],stage3:sc[2],total:total(),durasi:playTimeText};
